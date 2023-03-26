@@ -31,7 +31,7 @@ export function authenticateToken(req, res, next) {
 }
 
 // Authorize user by role
-export  function authorizeRole(role) {
+export function authorizeRole(role) {
   return (req, res, next) => {
     User.findById(req.user._id, (err, user) => {
       if (err) {
@@ -47,7 +47,7 @@ export  function authorizeRole(role) {
   }
 }
 // Define admin middleware
-export  function adminMiddleware(req, res, next) {
+export function adminMiddleware(req, res, next) {
   if (req.user.role === 'admin') {
     next()
   } else {

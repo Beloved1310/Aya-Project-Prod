@@ -6,7 +6,7 @@ import {
   getCart,
 } from '../controller/CartPurchase.js'
 import CartPurchase from '../model/CartPurchase.js'
-import {authenticateToken} from "../middleware/jwt.js";
+import { authenticateToken } from '../middleware/jwt.js'
 
 const cartPurchaseRoutes = express.Router()
 
