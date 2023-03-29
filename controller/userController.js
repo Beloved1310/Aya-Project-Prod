@@ -12,12 +12,12 @@ export const register = async (req, res) => {
   if (error) {
     return res.status(400).send(error.details[0].message);
   }
-  const { email, password, firstname, lastname, role, phoneNumber } = req.body;
+  const { email, password, firstname, lastname } = req.body;
 
   try {
     // Check if user already exists
     const user = await User.findOne({ email });
-    if (role !== "admin") return res.status(400).send("Access denied");
+    // if (role !== "admin") return res.status(400).send("Access denied");
     if (user) {
       return res.status(400).json({ msg: "User already exists" });
       // Hash password and save user
@@ -29,15 +29,14 @@ export const register = async (req, res) => {
       const user = await User.create({
         firstname,
         lastname,
-        role,
-        phoneNumber,
+       
         email,
-        confirmPassword: hashedPassword,
+        
         password: hashedPassword,
       });
       res.json({
         status: "success",
-        data: user,
+        data: {firstname,  lastname, email, password},
       });
     }
   } catch (error) {

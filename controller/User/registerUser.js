@@ -1,9 +1,16 @@
 import User from '../../model/User.js'
 import bcrypt from 'bcrypt';
+import registerValidation from '../../validation/register.js';
 
 
-export const registerUser = async (req, res) => {
+export const registerUser =
+ async (req, res) => {
+  
   try {
+    const { error } = registerValidation.validate(req.body);
+    if (error) {
+      return res.status(400).send(error.details[0].message);
+    }
     const {
       firstname,
       lastname,
@@ -20,7 +27,7 @@ export const registerUser = async (req, res) => {
       profilephoto
     } = req.body;
 
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne(email );
     if (existingUser) {
       return res.status(409).json({ message: 'User already exists' });
     }
@@ -49,6 +56,7 @@ export const registerUser = async (req, res) => {
       data: user 
     });
   } catch (error) {
+    console.log(error, '')
     res.status(500).json({ message: 'Something went wrong' });
     console.error(error);
   }

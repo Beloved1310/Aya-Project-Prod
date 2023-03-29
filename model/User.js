@@ -22,11 +22,11 @@ const userRoleSchema = new mongoose.Schema(
     },
     confirmPassword: {
       type: String,
-      required: true,
+      // required: true,
     },
     phoneNumber: {
       type: String,
-      required: true,
+      // required: true,
     },
     companyId: {
       type: String,
@@ -37,7 +37,7 @@ const userRoleSchema = new mongoose.Schema(
     },
     businessType: {
       type: String,
-      enum: [],
+      // enum: [],
     },
     address: [
       {
